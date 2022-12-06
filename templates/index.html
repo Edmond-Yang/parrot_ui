@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>換句話說系統 - NLP實驗室</title>
+        <link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet">
+        <link rel="icon" href="{{ url_for('static', path='/css/lab.png') }}">
+        <script src="{{ url_for('static', path='/js/control.js') }}"></script>
+    </head>
+    <body>
+        <nav>
+            <img src="{{ url_for('static', path='/css/lab.png') }}" width="100px">
+            <p>專題生: 楊世宇</p>
+        </nav>
+        <header>
+            <h1>換句話說系統</h1>
+            <p>輸入資料，以選擇你想要改變的句子</p>
+        </header>
+        <hr>
+        <div>
+            {% if status %}
+            <p class="flash {{ status['status'] }}">{{ status['details'] }}</p>
+            {% endif %}
+        </div>
+        <div class="option-div">
+            <table class="option-table">
+                <tr>
+                    <th id="option-part">選取部分</th>
+                    <th id="option-all">全部</th>
+                </tr>
+            </table>
+        </div>
+        <form id="uploadform" method="post" enctype="multipart/form-data">
+            <div>
+                <p><label for="content">短文</label></p>
+                <textarea id="content" name="content"></textarea>
+            </div>
+            <div>
+                <button id="">送出</button>
+            </div>
+        </form>
+
+        <footer>
+            <p>Demo Website</p>
+            <p>中興大學 理學大樓721室 NLP LAB</p>
+        </footer>
+
+    </body>
+</html>
