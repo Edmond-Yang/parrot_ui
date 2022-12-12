@@ -3,18 +3,21 @@ function interface_select(){
 
     $('#check').hide();
     $('#cancel').show();
-    $('#choose').show();
+    $('#transfer').show();
     $('#restart').show();
 
     $('#content').html($('#content').text())
     $('#content').attr('contenteditable', 'False');
 
     $('#cancel').click(interface_initial);
-    $('#restart').click(clear_mark);
-    $('#choose').click(sumbit_article);
+    $('#restart').click(function(){
+        $('#content').html('');
+        interface_initial();
+    });
+    $('#transfer').click(sumbit_article);
     $('#content').mouseup(select_article);
-
-
+    // document.addEventListener('selectionchange', select_article);
+    
 }
 
 function check_mark(str){
@@ -187,16 +190,13 @@ function select_article(){
 
     if(selection.type != "Range")
         return;
-    
-    if(selection.anchorNode.parentElement != $('div#content')[0] && selection.anchorNode.parentElement != $('mark')[0])
-        return;
 
-    if(selection.focusNode.parentNode != $('div#content')[0] && selection.focusNode.parentNode != $('mark')[0])
-        return;
-
-    var text = $('div#content').text();
     const subString = selection.toString();
 
+    if(!$('#content').text().includes(subString))
+        return;
+    
+    var text = $('div#content').text();
     text = text.replaceAll(subString, '<mark>' + subString + '</mark>')
 
     $('div#content').html(text);
@@ -215,7 +215,7 @@ function interface_initial(){
 
     $('#check').show();
     $('#cancel').hide();
-    $('#choose').hide();
+    $('#transfer').hide();
     $('#restart').hide();
     $('#flash-div').hide();
     $('#container').hide();

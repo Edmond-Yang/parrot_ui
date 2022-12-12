@@ -4,6 +4,7 @@ import warnings
 import nltk
 from transformers import pipeline
 from nltk.tokenize import sent_tokenize
+from deepmultilingualpunctuation import PunctuationModel
 
 
 class parrotAPI():
@@ -12,6 +13,7 @@ class parrotAPI():
         warnings.filterwarnings("ignore")
         nltk.download('punkt')
 
+        self.model = PunctuationModel()
         self.parrot = Parrot(model_tag="prithivida/parrot_paraphraser_on_T5")
         self.ner = pipeline('ner')
 
@@ -80,12 +82,11 @@ class parrotAPI():
         # blank space
 
         transfer_sentence = transfer_sentence.replace('  ', ' ')
-        transfer_sentence = self._process_blank_space()
+        transfer_sentence = self._process_blank_space(transfer_sentence)
         
                 
         # punctuation
-        if transfer_sentence[-1] != origin_sentence[-1]:
-            transfer_sentence += origin_sentence[-1]
+        transfer_sentence = self.model.restore_punctuation(transfer_sentence)
 
 
         return transfer_sentence

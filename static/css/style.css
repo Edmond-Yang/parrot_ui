@@ -36,7 +36,6 @@ header{
 
 form{
     margin-top: 30px;
-    margin-left: 320px;
 }
 
 div{
@@ -52,9 +51,7 @@ input{
     border-color: rgb(124, 124, 124);
     border-style: solid;
     border-radius: 5px;
-    margin: 5px 0px;
-
-    width: 50%;
+    margin: 5px 15px;
     font-size: 16px;
 }
 
@@ -72,22 +69,24 @@ input{
 
 #content{
     width: 75%;
-    height: 250px;
+    height: 300px;
     overflow: auto;
     border-width: 1.25px;
     border-color: rgb(124, 124, 124);
     border-style: solid;
     border-radius: 5px;
 
-    font-size: 16px;
+    font-size: 18px;
+    margin: 10px 12.5%;
+    padding: 5px 10px;
 }
 
 button{
-    background-color: black;
     color: white;
 
-    margin-top: 30px;
-    padding: 3px 10px;
+    margin-top: 10px;
+    margin-right: 12px;
+    padding: 8px 24px;
 
     font-size: 15px;
 
@@ -95,8 +94,58 @@ button{
     border-radius: 6px;
 }
 
-button:hover{
-    background-color: rgb(148, 148, 148);
+h1{
+    margin-bottom: 10px;
+}
+
+p{
+    margin: 5px 0px;
+}
+
+mark{
+    background-color: rgba(255, 166, 0, 0.744);
+}
+
+#btn-div{
+    margin-top: 10px;
+    margin-left: 12.5%;
+}
+
+#check{
+    background-color: orange;
+}
+
+#check:hover{
+    background-color: rgb(255, 196, 86);
+}
+
+#transfer, .btn-replace{
+    background-color: green;
+}
+
+#transfer:hover, .btn-replace:hover{
+    background-color: rgb(4, 169, 4);
+}
+
+#restart, .btn-origin{
+    background-color: red;
+}
+
+#restart:hover, .btn-origin:hover{
+    background-color: rgb(255, 100, 100);
+}
+
+#cancel{
+    background-color: grey;
+}
+
+#cancel:hover{
+    background-color: rgb(196, 196, 196);
+}
+
+.label{
+    margin-left: 12.5%;
+    font-size: 16px;
 }
 
 .flash{
@@ -119,41 +168,22 @@ button:hover{
     background-color: rgba(1, 147, 52, 0.797);
 }
 
-.option-div{
+
+#container{
+    margin: 30px 12.5%;
+}
+
+li{
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.button-div{
     display: flex;
-    justify-content: center;
-    text-align: center;
-
-    margin-right: 0px;
+    justify-content: space-around;
 }
 
-.option-table{
-    width: 15%;
-    height: 5%;
-    border-spacing: 0px;
+#p{
+    margin-top: 15px
 }
-
-.option-table th:first-child {
-    width: 7.5%;
-    border-radius:  10px 0 0 10px;
-}
-
-.option-table th:last-child {
-    width: 7.5%;
-    border-radius: 0 10px 10px 0;
-}
-
-.choose{
-    background-color: orange;
-    color: white;
-}
-
-.not-choose{
-    border: 3px orange solid;
-    cursor: pointer;
-}
-
-.not-choose:hover{
-    background-color: rgb(237, 237, 237);
-}
-
