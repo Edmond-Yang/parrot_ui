@@ -1,57 +1,258 @@
-function $(selector){
-    return new Pointer(selector);
-}
 
-class Pointer{
-    constructor(selector){
-        this.node = document.querySelector(selector);
-    }
+function interface_select(){
 
-    get html(){
-        if(this.node.innerHTML)
-            return this.node.innerHTML;
-        else
-            return '';
-    }
+    $('#check').hide();
+    $('#cancel').show();
+    $('#choose').show();
+    $('#restart').show();
 
-    html(value){
-        this.node.innerHTML = value;
-    }
+    $('#content').html($('#content').text())
+    $('#content').attr('contenteditable', 'False');
 
-    attribute(key, value){
-        this.node.setAttribute(key, value);
-    }
+    $('#cancel').click(interface_initial);
+    $('#restart').click(clear_mark);
+    $('#choose').click(sumbit_article);
+    $('#content').mouseup(select_article);
 
-    event(type, method, parameter = null){
-        this.node.addEventListener(type, method);
-        this.node.parameter = parameter;
-    }
 
 }
 
-function setOption(option){
-    if(option == 0){
-        $('#option-part').attribute('class', 'choose');
-        $('#option-all').attribute('class', 'not-choose');
-        $('#option-all').event('click', function(){
-            setOption(1);
-        })
+function check_mark(str){
+    return str.includes('<mark>') && str.includes('</mark>');
+}
 
-        // display something
+function sumbit_article(){
+
+    $('#flash-div').show();
+
+    if(!check_mark($('#content').html())){
+        $('#flash').text('尚未選擇句子');
+        $('#flash').addClass('danger');
+        $('#flash-div').fadeOut(3000);
+        return;
     }
 
-    if(option == 1){
-        $('#option-all').attribute('class', 'choose');
-        $('#option-part').attribute('class', 'not-choose');
-        $('#option-part').event('click', function(){
-            setOption(0);
-        })
+    $('#flash').text('轉換句子中，請稍後');
+    $('#flash').addClass('success');
 
-        // display something
+    $('#btn-div').hide();
+    $('#content').off('mouseup');
+
+    const tid = setInterval(animate_waiting, 400);
+
+    const api_url = "/api";
+    var sentences = $('div#content').html();
+
+    var _list = sentences.split('mark>');
+
+    for(const i of _list){
+        if(i.endsWith('</'))
+            sentences = i.replaceAll('</','');
     }
+
+    $.ajax({
+        url: api_url,
+        type: 'post',
+        async: true,
+        headers: {
+            'Access-Control-Allow-Origin':'*',
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({'sentence': sentences.trim()}),
+        datatype: 'json',
+        success: function(response){
+
+            clearInterval(tid);
+            $('#flash').text('轉換完成');
+            $('#flash-div').fadeOut(3000);
+
+            $('#container').slideDown("slow");
+
+            var count_i = 0, count_j = 0;
+
+            $('div#content').html($('#content').text());
+
+            for(var i in response){
+
+                count_j = 0;
+                $('#container').append('<li id="sentence-' + count_i.toString() + '"><span id="option-' + count_i.toString() + '">' + i + '</span><hr>');
+
+                for(var j of response[i]){
+                    $('#container').append('<div class="list list-' + count_i.toString() + '"><input id=select-"'  + count_i.toString() + '-' + count_j.toString() + '" type="radio" name="select-' + + count_i.toString() + '" value="select-' + + count_i.toString() + '-' + count_j.toString() + '"><label>' + j + '</label></div>');
+                    count_j ++;
+                }
+
+                var _txt = '<div class="button-div"><button class="btn-replace" id="sumbit-' + count_i.toString() + '">取代</button>';
+                _txt += '<button class="btn-origin" id="cancel-' + count_i.toString() + '">使用原句</button></div></div></li>';
+
+                $('#container').append(_txt)
+                $('#option-' + count_i.toString()).click({num: count_i}, function(event){
+                    var num = event.data.num;
+                    var text = $('div#content').text();
+                    const subString = $('#option-'+num.toString()).text();
+                    text = text.replaceAll(subString, '<mark>' + subString + '</mark>')
+                    $('div#content').html(text);
+                })
+
+                $('#sumbit-' + count_i.toString()).click({num: count_i, str: i},function(event){
+
+                    var num = event.data.num;
+                    var str = event.data.str;
+
+                    const selected = $('input[name="select-' + num.toString() +'"]').val();
+                    if(typeof(selected) == undefined){
+                        alert('未選取任何句子')
+                        return;
+                    }
+
+                    var replace_num = parseInt(selected.split('-').pop());
+                    var text = $('div#content').text();
+                    const subString = str;
+                    text = text.replaceAll(subString, response[str][replace_num]);
+                    $('div#content').html(text);
+
+                    $(this).parent().remove();
+
+                    var list = $('.list-' + num.toString());
+                    var length = list.length
+                    for(var i=0 ; i< length ; i++)
+                        list[i].remove();
+
+                    $('#sentence-'+num.toString()).remove();
+
+                    $('div#content').html($('#content').text());
+
+                    if($('#container').text().replaceAll('\n','').replaceAll(' ', '').length == 0){
+                        $('#content').mouseup(select_article);
+                        $('#btn-div').show();
+                    }
+                        
+                })
+
+                $('#cancel-' + count_i.toString()).click({num: count_i}, function(event){
+
+                    var num = event.data.num;
+
+                    $(this).parent().remove();
+
+                    var list = $('.list-' + num.toString());
+                    var length = list.length
+                    for(var i=0 ; i< length ; i++)
+                        list[i].remove();
+
+                    $('#sentence-'+num.toString()).remove();
+
+                    $('div#content').html($('#content').text());
+
+                    if($('#container').text().replaceAll('\n','').replaceAll(' ', '').length == 0){
+                        $('#content').mouseup(select_article);
+                        $('#btn-div').show();
+                    }
+                        
+                })
+
+                count_i ++;
+            }
+            
+            
+        },
+        error: function(error){
+            alert(error);
+        },
+        complete: function(){
+        }
+    })
+
+
+}
+
+function animate_waiting(){
+
+    if($('#flash').text() === '轉換句子中，請稍後')
+        $('#flash').text('轉換句子中，請稍後 •');
+    else if($('#flash').text() === '轉換句子中，請稍後 •')
+        $('#flash').text('轉換句子中，請稍後 • •');
+    else if($('#flash').text() === '轉換句子中，請稍後 • •')
+        $('#flash').text('轉換句子中，請稍後 • • •');
+    else if($('#flash').text() === '轉換句子中，請稍後 • • •')
+        $('#flash').text('轉換句子中，請稍後');
+
+}
+
+
+
+function select_article(){
+
+    const selection = document.getSelection();
+
+    if(selection.type != "Range")
+        return;
+    
+    if(selection.anchorNode.parentElement != $('div#content')[0] && selection.anchorNode.parentElement != $('mark')[0])
+        return;
+
+    if(selection.focusNode.parentNode != $('div#content')[0] && selection.focusNode.parentNode != $('mark')[0])
+        return;
+
+    var text = $('div#content').text();
+    const subString = selection.toString();
+
+    text = text.replaceAll(subString, '<mark>' + subString + '</mark>')
+
+    $('div#content').html(text);
+    
+}
+
+function clear_mark(){
+    var text = $('#content').html()
+
+    text = text.replaceAll('<mark>', '');
+    text = text.replaceAll('</mark>', '');
+    $('#content').html(text);
+}
+
+function interface_initial(){
+
+    $('#check').show();
+    $('#cancel').hide();
+    $('#choose').hide();
+    $('#restart').hide();
+    $('#flash-div').hide();
+    $('#container').hide();
+    
+    $('#check').click(interface_select);
+    $('#content').attr('contenteditable', 'True');
+
+    var text = $('#content').html()
+
+    text = text.replaceAll('<mark>', '');
+    text = text.replaceAll('</mark>', '');
+    $('#content').html(text);
+
+    clear_mark();
+
+    $('#content').on('paste',function(e){
+        var paste_text = e.originalEvent.clipboardData.getData('text')
+        e.preventDefault()
+        $(this).html(paste_text)
+    })
+    
+}
+
+function btn_disable(selector, bool){
+
+    if(bool){
+        $(selector).attr('disable', true);
+        $(selector).addClass('disable');
+    }
+    else{
+        $(selector).attr('disable', false);
+        $(selector).removeClass('disable');
+    }
+
 }
 
 
 window.onload = function(){
-    setOption(0);
+    interface_initial();
 }
