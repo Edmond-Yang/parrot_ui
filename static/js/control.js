@@ -15,7 +15,7 @@ function interface_select(){
         interface_initial();
     });
     $('#transfer').click(sumbit_article);
-    $('#content').mouseup(select_article);
+    $('body').mouseup(select_article);
     // document.addEventListener('selectionchange', select_article);
     
 }
@@ -81,7 +81,7 @@ function sumbit_article(){
                 $('#container').append('<li id="sentence-' + count_i.toString() + '"><span id="option-' + count_i.toString() + '">' + i + '</span><hr>');
 
                 for(var j of response[i]){
-                    $('#container').append('<div class="list list-' + count_i.toString() + '"><input id=select-"'  + count_i.toString() + '-' + count_j.toString() + '" type="radio" name="select-' + + count_i.toString() + '" value="select-' + + count_i.toString() + '-' + count_j.toString() + '"><label>' + j + '</label></div>');
+                    $('#container').append('<div class="list list-' + count_i.toString() + '"><input id="select-'  + count_i.toString() + '-' + count_j.toString() + '" type="radio" name="select-' + + count_i.toString() + '" value="select-' + + count_i.toString() + '-' + count_j.toString() + '"><label for="select-'  + count_i.toString() + '-' + count_j.toString() + '">' + j + '</label></div>');
                     count_j ++;
                 }
 
@@ -102,12 +102,18 @@ function sumbit_article(){
                     var num = event.data.num;
                     var str = event.data.str;
 
-                    const selected = $('input[name="select-' + num.toString() +'"]').val();
-                    if(typeof(selected) == undefined){
+                    var iz_checked = false;
+                    console.log(iz_checked);
+                    $('input[name="select-' + num.toString() +'"]').each(function(){
+                        iz_checked = iz_checked || $(this).is(':checked');
+                        console.log(iz_checked)
+                    });
+                    if ( ! iz_checked ){
                         alert('未選取任何句子')
                         return;
                     }
 
+                    const selected = $('input[name="select-' + num.toString() +'"]').val();
                     var replace_num = parseInt(selected.split('-').pop());
                     var text = $('div#content').text();
                     const subString = str;
@@ -156,11 +162,16 @@ function sumbit_article(){
 
                 count_i ++;
             }
+
+            if($('#container').text().replaceAll('\n','').replaceAll(' ', '').length == 0){
+                $('#content').mouseup(select_article);
+                $('#btn-div').show();
+            }
             
             
         },
         error: function(error){
-            alert(error);
+            alert('發生錯誤，請盡快與我們聯繫');
         },
         complete: function(){
         }
@@ -170,6 +181,8 @@ function sumbit_article(){
 }
 
 function animate_waiting(){
+
+    console.log($('#flash').text());
 
     if($('#flash').text() === '轉換句子中，請稍後')
         $('#flash').text('轉換句子中，請稍後 •');
@@ -219,6 +232,11 @@ function interface_initial(){
     $('#restart').hide();
     $('#flash-div').hide();
     $('#container').hide();
+
+    $('#check').unbind();
+    $('#cancel').unbind();
+    $('#transfer').unbind();
+    $('#restart').unbind();
     
     $('#check').click(interface_select);
     $('#content').attr('contenteditable', 'True');
@@ -236,6 +254,8 @@ function interface_initial(){
         e.preventDefault()
         $(this).html(paste_text)
     })
+
+    
     
 }
 

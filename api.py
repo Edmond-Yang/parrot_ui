@@ -80,7 +80,6 @@ class parrotAPI():
         transfer_sentence = transfer_sentence.replace(' i ', ' I ')
 
         # blank space
-
         transfer_sentence = transfer_sentence.replace('  ', ' ')
         transfer_sentence = self._process_blank_space(transfer_sentence)
         
@@ -97,7 +96,12 @@ class parrotAPI():
         paragraph, sentences = self._pre_process(paragraph)
 
         for _sentence in sentences:
-            transfer_sentences.update(self._transfer_sentence(_sentence, ad_num, fl_num, do_diverse))
+
+            temp_dict = self._transfer_sentence(_sentence, ad_num, fl_num, do_diverse)
+            print(temp_dict)
+            if len(temp_dict[_sentence]) != 0 and not (len(temp_dict[_sentence]) == 1 and temp_dict[_sentence][0] == _sentence):
+                transfer_sentences.update(temp_dict)
+            print(transfer_sentences)
 
         return transfer_sentences
         
