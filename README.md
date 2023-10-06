@@ -6,7 +6,7 @@
     
     確認文章至不可編輯、可以選取句子狀態
     
-    ![Screenshot 2023-10-06 at 21.21.08.png](Screenshot_2023-10-06_at_21.21.08 1.png)
+    ![Screenshot 2023-10-06 at 21.21.08.png](./Screenshot_2023-10-06_at_21.21.08 1.png)
     
 - **轉換鍵**
     
