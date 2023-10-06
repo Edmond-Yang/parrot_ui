@@ -67,7 +67,7 @@ class parrotAPI():
             transfer_sentence = transfer_sentence.replace(word['word'].lower(), word['word'])
 
         # month and week
-        replace_list = ['Monday', 'Tuesday', 'Wednwsday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        replace_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         for word in replace_list:
             transfer_sentence = transfer_sentence.replace(word.lower(), word)
 
