@@ -20,7 +20,7 @@
     
     將文章轉回可編輯狀態，並將文章清空
     
-    ![Screenshot 2023-10-06 at 21.25.45.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.25.45.png)
+    ![Screenshot 2023-10-06 at 21.25.45.png](Screenshot_2023-10-06_at_21.25.45.png)
     
 
 ## 使用步驟
