@@ -8,7 +8,7 @@
     
     確認文章至不可編輯、可以選取句子狀態
     
-    ![Screenshot 2023-10-06 at 21.21.08.png](%E4%BF%AE%E9%A3%BE%E6%96%87%E7%AB%A0%E7%B6%B2%E7%AB%99%20ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.21.08.png)
+    ![Screenshot 2023-10-06 at 21.21.08.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.21.08.png)
     
 - **轉換鍵**
     
@@ -22,7 +22,7 @@
     
     將文章轉回可編輯狀態，並將文章清空
     
-    ![Screenshot 2023-10-06 at 21.25.45.png](%E4%BF%AE%E9%A3%BE%E6%96%87%E7%AB%A0%E7%B6%B2%E7%AB%99%20ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.25.45.png)
+    ![Screenshot 2023-10-06 at 21.25.45.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.25.45.png)
     
 
 ## 使用步驟
@@ -31,23 +31,23 @@
 
 1. 將文章輸入至此區塊中，並按下**確認鍵**
     
-    ![Screenshot 2023-10-06 at 21.21.08.png](%E4%BF%AE%E9%A3%BE%E6%96%87%E7%AB%A0%E7%B6%B2%E7%AB%99%20ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.21.08%201.png)
+    ![Screenshot 2023-10-06 at 21.21.08.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.21.08%201.png)
     
 2. 選擇其中一段需要轉換的文章或句子，確認出現螢光橘為要轉換的內容後，並點選**轉換鍵**
     
-    ![Screenshot 2023-10-06 at 21.39.58.png](%E4%BF%AE%E9%A3%BE%E6%96%87%E7%AB%A0%E7%B6%B2%E7%AB%99%20ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.39.58.png)
+    ![Screenshot 2023-10-06 at 21.39.58.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.39.58.png)
     
 3. 等待轉換完成
     
-    ![Screenshot 2023-10-06 at 21.41.45.png](%E4%BF%AE%E9%A3%BE%E6%96%87%E7%AB%A0%E7%B6%B2%E7%AB%99%20ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.41.45.png)
+    ![Screenshot 2023-10-06 at 21.41.45.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.41.45.png)
     
 4. 選取要轉換的句子，按**取代鍵** / ****按下**原鍵**
     
-    ![Screenshot 2023-10-06 at 21.42.22.png](%E4%BF%AE%E9%A3%BE%E6%96%87%E7%AB%A0%E7%B6%B2%E7%AB%99%20ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.42.22.png)
+    ![Screenshot 2023-10-06 at 21.42.22.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.42.22.png)
     
 5. Finish
     
-    ![Screenshot 2023-10-06 at 21.47.52.png](%E4%BF%AE%E9%A3%BE%E6%96%87%E7%AB%A0%E7%B6%B2%E7%AB%99%20ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.47.52.png)
+    ![Screenshot 2023-10-06 at 21.47.52.png](修飾文章網站ef2806711a2944a48796160f6e0dd1dc/Screenshot_2023-10-06_at_21.47.52.png)
     
 
 ## 技術
